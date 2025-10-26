@@ -95,13 +95,13 @@ def main():
     examples = (
         "Examples:\n"
         "  # 1) Generate pattern (length 6000)\n"
-        "  badchar_offset.py -l 6000 > pattern.bin\n\n"
+        "  badchar_offset.py -l 6000 \n\n"
         "  # 2) Generate with badchars filtered out\n"
-        r"  badchar_offset.py -l 6000 -b ""\x00\x0a\x0d\x20\x25\x2b\x2f\x5c"" > pattern.bin" "\n\n"
+        r"  badchar_offset.py -l 6000 -b '\x00\x0a\x0d\x20\x25\x2b\x2f\x5c' " "\n\n"
         "  # 3) Find offset later (same length)\n"
-        "  badchar_offset.py -l 6000 -q 0x41326141\n\n"
+        "  badchar_offset.py -l 6000 -q 62433362\n\n"
         "  # 4) Find offset with sets and badchars\n"
-        r"  badchar_offset.py -l 6000 -q Aa3A -s upper,lower,number -b ""\x41""" "\n"
+        r"  badchar_offset.py -l 2000 -b '\x42\x41' -q 62433362" "\n"
     )
 
     ap = argparse.ArgumentParser(
@@ -109,8 +109,7 @@ def main():
         usage="%(prog)s -l LENGTH [-q QUERY] [-s SETS] [-b BADCHARS]",
         formatter_class=_Fmt,
         description=(
-            "Generate a MSF-compatible pattern (pattern_create)\n"
-            "and locate offsets (pattern_offset) with additional -b (badchars) filtering.\n"
+            "Generate a MSF-compatible pattern (pattern_create) and locate offsets (pattern_offset) with additional -b (badchars) filtering.\n"
             "\n"
             "REQUIRED: -l/--length first; optional -q searches within the generated buffer."
         ),
